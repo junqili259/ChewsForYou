@@ -25,15 +25,14 @@ $ pip install flask-wtf
 
 The virtual environment has to be running. After it's activated enter the following:
 
-
-For Mac/Linux users:
+For Mac/Linux/WSL users:
 ```
-export FLASK_APP=hello.py
-flask run
+$ export FLASK_APP=hello.py
+$ flask run
 ```
 
 For Windows users:
 ```
-set FLASK_APP=hello.py
-flask run
+$ set FLASK_APP=hello.py
+$ flask run
 ```
