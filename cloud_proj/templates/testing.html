@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TESTING ONLY</title>
+    <h1>CHEWS FOR YOU</h1>
+</head>
+<body>
+    <form method="POST" action="/newpage">
+        <div class="form-field">{{ form.address.label }} {{ form.address }}</div>
+        <div class="form-field">{{ form.city.label }} {{ form.city }}</div>
+        <div class="form-field">{{ form.state.label }} {{ form.state }}</div>
+        <div class="form-field">{{ form.zipcode.label }} {{ form.zipcode }}</div>
+        {{ form.submit }}
+    </form>   
+</body>
+</html>
