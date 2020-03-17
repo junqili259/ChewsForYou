@@ -9,6 +9,7 @@ __pycache__/
 # Personal ignores
 cloud_proj/env
 cloud_proj/settings.json
+cloud_proj/api.py
 
 # Distribution / packaging
 
