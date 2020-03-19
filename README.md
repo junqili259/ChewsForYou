@@ -37,12 +37,12 @@ The virtual environment has to be running. After it's activated enter the follow
 
 For Mac/Linux/WSL users:
 ```
-$ export FLASK_APP=hello.py
+$ export FLASK_APP=routes.py
 $ flask run
 ```
 
 For Windows users:
 ```
-$ set FLASK_APP=hello.py
+$ set FLASK_APP=routes.py
 $ flask run
 ```
