@@ -10,6 +10,7 @@ __pycache__/
 cloud_proj/env
 cloud_proj/settings.json
 cloud_proj/api.py
+cloud_proj/.pyc
 
 # Distribution / packaging
 
