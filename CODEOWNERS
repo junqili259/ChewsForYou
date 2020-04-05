@@ -1,0 +1,15 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @global-owner1 and @global-owner2 will be requested for
+# review when someone opens a pull request.
+*       @junqili259 @J-sonLi
+
+
+# Owner for all python files
+*.py    @junqili259
+
+# Owner for everything in the /cloud/proj/template directory
+/cloud_proj/templates @Jam-spoon @J-sonLi @ray12125
+
+
+
