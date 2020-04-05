@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+</head>
+    <h1>Register an Account</h1>
+<body>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.firstName.label() }} {{ form.firstName(class="form-control form-control-lg") }} <br>
+            {{ form.lastName.label() }} {{ form.lastName(class="form-control form-control-lg") }} <br>
+            {{ form.email.label() }} {{ form.email(class="form-control form-control-lg") }} <br>
+            {{ form.confirmEmail.label() }} {{ form.confirmEmail(class="form-control form-control-lg") }} <br>
+            {{ form.username.label() }} {{ form.username(class="form-control form-control-lg") }} <br>
+            {{ form.password.label() }} {{ form.password(class="form-control form-control-lg") }} <br>
+            {{ form.confirmPassword.label() }} {{ form.confirmPassword(class="form-control form-control-lg") }} <br>
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</body>
+</html>
