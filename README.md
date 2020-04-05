@@ -18,11 +18,17 @@ $ pip install virtualenv
 ```
 
 Activating the environment:
+
+For Mac/Linux/WSL users:
 ```
 $ virtualenv env
 $ source env/bin/activate
 ```
-
+For Windows users:
+```
+$ virtualenv env
+$ env\Scripts\activate
+```
 
 
 4. Now that you created your virtual environment and activated it, we want to install the neccessary packages.
