@@ -4,6 +4,13 @@
     <title>Login</title>
 </head>
 <body>
-    
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label() }} {{ form.username(class="form-control form-control-lg") }} <br>
+            {{ form.password.label() }} {{ form.password(class="form-control form-control-lg") }} <br>
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
 </body>
 </html>
