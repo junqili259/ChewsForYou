@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request
-from forms import AddressForm, RegisterForm
+from forms import AddressForm, RegisterForm, LoginForm
 import requests, random
 from api import business_search
 
@@ -50,9 +50,15 @@ def submitAddress():
     
 
 # Login page for users with a pre-existing account
-@app.route("/login")
+@app.route("/login", methods=['GET','POST'])
 def login():
-    return render_template('login.html')
+    #Create and pass login form to login webpage
+    loginForm = LoginForm()
+
+    # if login info is submitted, compare with data from database 
+
+    
+    return render_template('login.html', form=loginForm)
 
 
 # Signing up for a new account
@@ -61,4 +67,7 @@ def register():
 
     # Create a register form object
     registerForm = RegisterForm()
+
+    # register form submit, store data into database
+
     return render_template('register.html', form=registerForm)
