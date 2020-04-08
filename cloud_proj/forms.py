@@ -17,14 +17,12 @@ class RegisterForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired()])
     confirmEmail = StringField('Confirm Email', validators=[DataRequired()])
     username = StringField('Username',validators=[DataRequired()])
-    #password = StringField('Password',validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    #confirmPassword = StringField('Confirm Password', validators=[DataRequired()])
     confirmPassword = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Sign Up')
 
 
 class LoginForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Login')
