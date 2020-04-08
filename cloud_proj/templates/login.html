@@ -7,9 +7,9 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.username.label() }} {{ form.username(class="form-control form-control-lg") }} <br>
-            {{ form.password.label() }} {{ form.password(class="form-control form-control-lg") }} <br>
-            {{ form.submit(class="btn btn-outline-info") }}
+            {{ form.username.label() }} {{ form.username }} <br>
+            {{ form.password.label() }} {{ form.password }} <br>
+            {{ form.submit }}
         </div>
     </form>
 </body>

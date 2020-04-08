@@ -8,11 +8,11 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.address.label() }} {{ form.address(class="form-control form-control-lg") }} <br>
-            {{ form.city.label() }} {{ form.city(class="form-control form-control-lg") }} <br>
-            {{ form.state.label() }} {{ form.state(class="form-control form-control-lg") }} <br>
-            {{ form.zipcode.label() }} {{ form.zipcode(class="form-control form-control-lg") }} <br>
-            {{ form.submit(class="btn btn-outline-info") }}
+            {{ form.address.label() }} {{ form.address }} <br>
+            {{ form.city.label() }} {{ form.city }} <br>
+            {{ form.state.label() }} {{ form.state }} <br>
+            {{ form.zipcode.label() }} {{ form.zipcode }} <br>
+            {{ form.submit }}
         </div>
     </form>
 </body>
