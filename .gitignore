@@ -11,6 +11,7 @@ cloud_proj/env
 cloud_proj/settings.json
 cloud_proj/api.py
 cloud_proj/.pyc
+cloud_proj/tests
 
 # Distribution / packaging
 

@@ -12,10 +12,12 @@ app.config['SECRET_KEY'] = '53ba0078b3c38695e0697cf2f4c8bd79'
 # Will not be in final implementation
 @app.route("/apitest")
 def hello_world():
-    address = ''
-    data = business_search(address) 
-    randomRestaurant = random.choice(data)
-    return redirect(randomRestaurant)
+    #address = ''
+    #data = business_search(address) 
+    #randomRestaurant = random.choice(data)
+    #return redirect(randomRestaurant)
+    form = AddressForm()
+    return render_template('testing.html', form=form)
 
 
 # Address Form page where user enters address information to obtain a random eatery in response
@@ -68,6 +70,13 @@ def register():
     # Create a register form object
     registerForm = RegisterForm()
 
+
+    if registerForm.validate_on_submit():
+
+        # if all information checks out, redirect to login
+        return redirect(url_for('login'))
+
+        
     # register form submit, store data into database
 
     return render_template('register.html', form=registerForm)
