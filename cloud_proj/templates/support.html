@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Support</title>
+</head>
+    <h1>Report an Issue</h1>
+    <p>If you're having trouble with this site, please use this form to describe your issue</p>
+<body>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.email.label() }} <br> {{form.email}} <br>
+            {{ form.subject.label() }} <br> {{form.subject}} <br>
+            {{ form.issue.label() }} <br> {{form.issue (rows='30',cols='80')}} <br>
+            {{ form.submit }}
+        </div>
+    </form>
+</body>
+</html>
