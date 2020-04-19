@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextField, SubmitField, PasswordField
+from wtforms import StringField, TextField, SubmitField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 #  Form for the user to input address details
@@ -26,3 +26,10 @@ class LoginForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField('Login')
+
+
+class SupportForm(FlaskForm):
+    email = StringField('Email',validators=[DataRequired(), Email()])
+    subject = StringField('Subject',validators=[DataRequired()])
+    issue = TextAreaField('Description of issue',validators=[DataRequired()])
+    submit = SubmitField('Submit')

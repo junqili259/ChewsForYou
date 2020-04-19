@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request
-from forms import AddressForm, RegisterForm, LoginForm
+from forms import AddressForm, RegisterForm, LoginForm, SupportForm
 import requests, random
 from api import business_search
 
@@ -57,7 +57,13 @@ def login():
     #Create and pass login form to login webpage
     loginForm = LoginForm()
 
-    # if login info is submitted, compare with data from database 
+    """
+    if loginForm.validate_on_submit():
+        # connect to google cloud database
+        # compare data with existing records
+        # if account doesn't exist flash error message
+        # if account exist redirect to address page
+    """
 
     
     return render_template('login.html', form=loginForm)
@@ -70,13 +76,30 @@ def register():
     # Create a register form object
     registerForm = RegisterForm()
 
-
+    """
     if registerForm.validate_on_submit():
 
-        # if all information checks out, redirect to login
+        # if all information checks out, redirect to login, this is for testing that validation works
         return redirect(url_for('login'))
-
         
-    # register form submit, store data into database
-
+        # connect to google cloud database
+        # store data into database
+        # confirm data is stored successfully
+        # redirect to login page
+    """
     return render_template('register.html', form=registerForm)
+
+
+@app.route("/support", methods=['GET','POST'])
+def support():
+    supportForm = SupportForm()
+    
+    """
+    if supportForm.validate_on_submit():
+        # get email information
+        # get subject information
+        # get description of issue information
+        # send data to blob storage
+
+    """
+    return render_template('support.html', form=supportForm)
