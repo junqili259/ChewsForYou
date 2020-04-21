@@ -1,0 +1,21 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+    <title>ChewsForYou Homepage</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/homepage.css')}}">
+	<a href="{{url_for('address')}}">Address</a>
+</head>
+<body>
+	<div class="form-container">
+		<div class="user-img"></div>
+		<ul class="list">
+			<li><h1><a href="{{ url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1></li>
+			<li><a href="{{url_for('register')}}"><button type="button">Register</button></a></li>
+			<li><a href="{{url_for('login')}}"><button type="button">Login</button></a></li>
+		</ul>
+	</div>
+	<div class="support">
+		<footer><a href= "{{ url_for('support')}}">Support</a></footer>
+	</div>
+</body> 
+</html>
