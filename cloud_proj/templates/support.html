@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
     <title>Support</title>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/support.css')}}">
 </head>
-    <h1>Report an Issue</h1>
+<div class="head">
+	<h1><a href="{{ url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1>
+    <h2>Report an Issue</h2>
     <p>If you're having trouble with this site, please use this form to describe your issue</p>
+</div>
 <body>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.email.label() }} <br> {{form.email}} <br>
-            {{ form.subject.label() }} <br> {{form.subject}} <br>
-            {{ form.issue.label() }} <br> {{form.issue (rows='30',cols='80')}} <br>
-            {{ form.submit }}
+		 <ul class="list">
+            <li>{{ form.email.label()}} <br> {{form.email}} <br></li>
+            <li>{{ form.subject.label()}} <br> {{form.subject}} <br></li>
+            <li> {{ form.issue.label() }} <br> {{form.issue (rows='30',cols='80')}} <br></li>
+            <li><button class="button">{{form.submit}}</button></li>
+		</ul>
         </div>
     </form>
 </body>
 </html>
+
