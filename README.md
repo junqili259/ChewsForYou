@@ -34,9 +34,8 @@ $ env\Scripts\activate
 4. Now that you created your virtual environment and activated it, we want to install the neccessary packages.
 
 ```
-$ pip install flask
-$ pip install requests
-$ pip install flask-wtf
+$ pip install -r requirements.txt
+
 ```
 
 ## Running the live server on your pc
@@ -45,12 +44,12 @@ The virtual environment has to be running. After it's activated enter the follow
 
 For Mac/Linux/WSL users:
 ```
-$ export FLASK_APP=routes.py
+$ export FLASK_APP=main.py
 $ flask run
 ```
 
 For Windows users:
 ```
-$ set FLASK_APP=routes.py
+$ set FLASK_APP=main.py
 $ flask run
 ```
