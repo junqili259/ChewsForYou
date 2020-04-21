@@ -19,10 +19,16 @@ def hello_world():
     form = AddressForm()
     return render_template('testing.html', form=form)
 
+#Home page where user can login or create an account
+#def homePage():
+@app.route('/', methods=['GET','POST'])
+def homepage():
+    
+    return render_template('homepage.html')
 
 # Address Form page where user enters address information to obtain a random eatery in response
-@app.route('/', methods=['GET','POST'])
-def submitAddress():
+@app.route("/address", methods=['GET','POST'])
+def address():
     
     # Create an address form object
     addressForm = AddressForm()
@@ -48,9 +54,8 @@ def submitAddress():
         
         # redirect user to that url
         return redirect(randomRestaurant)
-    return render_template('home.html', form=addressForm)
+    return render_template('address.html', form=addressForm)
     
-
 # Login page for users with a pre-existing account
 @app.route("/login", methods=['GET','POST'])
 def login():
