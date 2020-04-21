@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/address.css')}}">
+    <title>Chews For You</title>
+</head>
+<body>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+			<ul class="list">
+				<h1><a href="{{url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1>
+				<li>{{ form.address.label() }} {{ form.address }} <br></li>
+				<li>{{ form.city.label() }} {{ form.city }} <br></li>
+				<li>{{ form.state.label() }} {{ form.state }} <br></li>
+				<li>{{ form.zipcode.label() }} {{ form.zipcode }} <br></li>
+				<li><button class="button">{{ form.submit }}</button></li>
+			</ul>
+        </div>
+		<div class="support">
+			<a href= "{{ url_for('support')}}">Support</a>
+		</div>
+    </form>	
+</body>
+</html>
