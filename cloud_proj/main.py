@@ -57,6 +57,8 @@ def homepage():
 def register():
     registerForm = RegisterForm()
     if registerForm.validate_on_submit():
+
+        #   Receive user input from register form
         first_name = request.form.get('firstName')
         last_name = request.form.get('lastName')
         email = request.form.get('email')
@@ -99,12 +101,14 @@ def login():
 
     if loginForm.validate_on_submit():
 
+        #   Receive user input from login form
         username = request.form.get('username')
         password = request.form.get('password')
 
         stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
 
         try:
+            #   Execute sql statement
             with db.connect() as conn:
                 result = conn.execute(stmt,user=username).fetchone()
                 user_password = result[0]
@@ -112,6 +116,10 @@ def login():
                 # if account exist redirect to address page
                 if user_password == password:
                     return redirect(url_for('address'))
+                else:
+                    # flash message if username exist but password doesn't match
+                    flash('Invalid Password')
+                    return redirect(url_for('login'))
 
 
         except Exception as e:
