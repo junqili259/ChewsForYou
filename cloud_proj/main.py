@@ -96,34 +96,32 @@ def login():
     #Create and pass login form to login webpage
     loginForm = LoginForm()
 
-    
+
     if loginForm.validate_on_submit():
-        
+
         username = request.form.get('username')
         password = request.form.get('password')
 
-        stmt = sqlalchemy.text("SELECT user,password FROM Account WHERE user=:username")
+        stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
 
         try:
             with db.connect() as conn:
+                result = conn.execute(stmt,user=username).fetchone()
+                user_password = result[0]
 
-            # compare data with existing records
-            result = conn.execute(stmt,username=username)
-            
+                # if account exist redirect to address page
+                if user_password == password:
+                    return redirect(url_for('address'))
+
 
         except Exception as e:
             logger.exception(e)
 
-        # if account doesn't exist flash error message
-        # if account exist redirect to address page
-        return Response(status=200, response=result)
-        #return redirect(url_for('address'))
+            # if account doesn't exist flash error message
+            flash('Invalid Username and Password')
+            return redirect(url_for('login'))
 
-    
     return render_template('login.html', form=loginForm)
-
-
-
 
 
 
