@@ -40,8 +40,8 @@ db = sqlalchemy.create_engine(
 
 
 
-#app.config['SECRET_KEY'] = '53ba0078b3c38695e0697cf2f4c8bd79'
-app.config['SECRET KEY'] = os.environ.get("KEY")
+app.config['SECRET_KEY'] = '53ba0078b3c38695e0697cf2f4c8bd79'
+
 
 
 #Home page where user can login or create an account
