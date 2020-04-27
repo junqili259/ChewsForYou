@@ -162,20 +162,3 @@ def address():
         # redirect user to that url
         return redirect(randomRestaurant)
     return render_template('address.html', form=addressForm)
-    
-
-
-
-@app.route("/support", methods=['GET','POST'])
-def support():
-    supportForm = SupportForm()
-    
-    """
-    if supportForm.validate_on_submit():
-        # get email information
-        # get subject information
-        # get description of issue information
-        # send data to blob storage
-
-    """
-    return render_template('support.html', form=supportForm)
