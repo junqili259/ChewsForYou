@@ -12,6 +12,7 @@ cloud_proj/settings.json
 cloud_proj/api.py
 cloud_proj/.pyc
 cloud_proj/tests
+cloud_proj/app.yaml
 
 # Distribution / packaging
 

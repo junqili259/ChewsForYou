@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html> 
+<html>
+<head> 
     <title>Login</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/login.css')}}">
 </head>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<h3>{{ message }}</h3>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
 <body>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.username.label() }} {{ form.username }} <br>
-            {{ form.password.label() }} {{ form.password }} <br>
-            {{ form.submit }}
-        </div>
-    </form>
+<form method="POST" action="">
+	{{ form.hidden_tag() }}
+	<div class="form-container">
+		<ul class="list">
+			<li><h1><a href="{{ url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1></li>
+			<li><h2>Sign in<h2></li>
+			<li>{{ form.username.label() }} {{ form.username }} <br></li>
+			<li>{{ form.password.label() }} {{ form.password }} <br></li>
+			<li><button class="button">{{ form.submit }}</button></li>
+		</ul>
+	</div>
 </body>
+
 </html>

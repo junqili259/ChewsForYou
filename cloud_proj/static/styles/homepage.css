@@ -1,0 +1,47 @@
+*{margin: 0; padding:0}
+body{
+	background-color: #FFC306;
+	padding-top:10vh;
+}
+
+a.chewsforyou{
+	text-decoration: none;
+	color:red;
+}
+.form-container{
+	width:250px;
+	height: auto;
+	padding: 50px 30px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 #000;
+	margin:auto;
+	position:relative;
+}
+ul.list{
+list-style-type: none;  
+text-align: center;
+}
+ul.list li{
+width: 250px;
+margin-bottom: 20px;
+}
+ul.list li button{
+	width: 250px;
+	text-align: center;
+	padding: 8px 0px;
+	border: none;
+	background-color: #d3d3d3;
+	border-radius: 12px;
+}
+ul.list li button[type="button"] {
+	background-color: #4690fb;
+	color: #fff;
+}
+
+.support{
+	position: absolute; 
+	bottom: 25px;
+	left: 720 px;
+	background-color: auto;
+}

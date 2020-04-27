@@ -2,20 +2,33 @@
 <html lang="en">
 <head>
     <title>Register</title>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/register.css')}}">
 </head>
-    <h1>Register an Account</h1>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h3>{{ message }}</h3>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 <body>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.firstName.label() }} {{ form.firstName }} <br>
-            {{ form.lastName.label() }} {{ form.lastName }} <br>
-            {{ form.email.label() }} {{ form.email }} <br>
-            {{ form.confirmEmail.label() }} {{ form.confirmEmail }} <br>
-            {{ form.username.label() }} {{ form.username }} <br>
-            {{ form.password.label() }} {{ form.password }} <br>
-            {{ form.confirmPassword.label() }} {{ form.confirmPassword }} <br>
-            {{ form.submit }}
+			<ul class="list">
+				<h1><a href="{{ url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1>
+				<li><h2>Register an Account</h2></li>
+				<li>{{ form.firstName.label() }} {{ form.firstName }} <br></li>
+				<li>{{ form.lastName.label() }} {{ form.lastName }} <br></li>
+				<li>{{ form.email.label() }} {{ form.email }} <br></li>
+				<li>{{ form.confirmEmail.label() }} {{ form.confirmEmail }} <br></li>
+				<li>{{ form.username.label() }} {{ form.username }} <br></li>
+				<li>{{ form.password.label() }} {{ form.password }} <br></li>
+				<li>{{ form.confirmPassword.label()}} {{ form.confirmPassword }} <br></li>
+				<li><button class="button">{{ form.submit }}</button></li>
+			</u1>
         </div>
     </form>
 </body>
