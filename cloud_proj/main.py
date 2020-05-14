@@ -17,7 +17,7 @@ cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
 
 
 app = Flask(__name__)
-
+app.config.from_object('config.Config')
 
 logger = logging.getLogger()
 
@@ -39,8 +39,6 @@ db = sqlalchemy.create_engine(
 )
 
 
-
-app.config['SECRET_KEY'] = '53ba0078b3c38695e0697cf2f4c8bd79'
 
 
 

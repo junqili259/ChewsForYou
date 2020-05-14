@@ -13,6 +13,7 @@ cloud_proj/api.py
 cloud_proj/.pyc
 cloud_proj/tests
 cloud_proj/app.yaml
+cloud_proj/config.py
 
 # Distribution / packaging
 
