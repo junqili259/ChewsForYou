@@ -53,3 +53,10 @@ For Windows users:
 $ set FLASK_APP=main.py
 $ flask run
 ```
+
+## Authors
+Jun Qi Li - junqili259@gmail.com
+Kent Zhang - kntzhang@gmail.com
+Raymond Chan - ray12125@gmail.com
+James Poon - jamespoon08@gmail.com
+Jason Li - Jason61798@gmail.com
