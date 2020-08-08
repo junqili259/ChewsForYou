@@ -5,7 +5,7 @@ import random
 import logging
 from flask import Flask, render_template, url_for, redirect, request, flash
 from forms import AddressForm, RegisterForm, LoginForm
-from api import business_search
+from api import business_search, sign_in
 from firebase_admin import credentials, auth, firestore, initialize_app
 
 
@@ -59,22 +59,18 @@ def login():
         # Receive user input from login form
         email = request.form.get('email')
         password = request.form.get('password')
-
+        
         try:
-            web_api_key = os.getenv('web_api_key')
-            request_ref = f"https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={web_api_key}"
-            headers = {"content-type": "application/json; charset=UTF-8"}
-            data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
-            request_object = requests.post(request_ref, headers=headers, data=data)
-            if request_object.json()['email'] != email:
-                return redirect(url_for('login'))
+            status = sign_in(email,password)
+            if status == 200:
+                return redirect(url_for('address'))
 
         except Exception as e:
             logger.exception(e)
             flash('Invalid Username and Password')
             return redirect(url_for('login'))
         
-        return redirect(url_for('address'))
+        #return redirect(url_for('address'))
     return render_template('login.html', form=loginForm)
 
 
