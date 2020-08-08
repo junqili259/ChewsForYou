@@ -1,4 +1,5 @@
 import os
+import json
 import logging
 from flask import Flask, render_template, url_for, redirect, request, Response, flash
 from forms import AddressForm, RegisterForm, LoginForm, SupportForm
@@ -37,7 +38,7 @@ def register():
         password = request.form.get('password')
 
         try:
-            auth.create_user(display_name=username,email=email,password=password)
+            auth.create_user(email=email,password=password)
 
         except Exception as e:
             logger.exception(e)
@@ -58,34 +59,25 @@ def login():
 
     if loginForm.validate_on_submit():
         # Receive user input from login form
-        username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
 
-
-        """
-        try:
-            #   Execute sql statement
-            with db.connect() as conn:
-                result = conn.execute(stmt,user=username).fetchone()
-                user_password = result[0]
-
-                # if account exist redirect to address page
-                if user_password == password:
-                    return redirect(url_for('address'))
-                else:
-                    # flash message if username exist but password doesn't match
-                    flash('Invalid Password')
-                    return redirect(url_for('login'))
         
+        try:
+            web_api_key = os.getenv('web_api_key')
+            request_ref = f"https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={web_api_key}"
+            headers = {"content-type": "application/json; charset=UTF-8"}
+            data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
+            request_object = requests.post(request_ref, headers=headers, data=data)
+            if request_object.json()['email'] != email:
+                return redirect(url_for('login'))
 
         except Exception as e:
             logger.exception(e)
-
-            # if account doesn't exist flash error message
             flash('Invalid Username and Password')
             return redirect(url_for('login'))
-        """
-
+        
+        return redirect(url_for('address'))
     return render_template('login.html', form=loginForm)
 
 
