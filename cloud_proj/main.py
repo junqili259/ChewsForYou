@@ -61,7 +61,6 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        #stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
 
         """
         try:
