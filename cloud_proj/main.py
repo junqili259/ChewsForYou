@@ -89,7 +89,7 @@ def login():
                     # flash message if username exist but password doesn't match
                     flash('Invalid Password')
                     return redirect(url_for('login'))
-        """
+        
 
         except Exception as e:
             logger.exception(e)
@@ -97,6 +97,7 @@ def login():
             # if account doesn't exist flash error message
             flash('Invalid Username and Password')
             return redirect(url_for('login'))
+        """
 
     return render_template('login.html', form=loginForm)
 
