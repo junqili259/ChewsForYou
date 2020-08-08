@@ -14,8 +14,9 @@ app.config.from_object('config.Config')
 
 logger = logging.getLogger()
 
-cred = credentials.Certificate("chewsforyou.json")
-firebase_app = initialize_app(cred)
+# cred = credentials.Certificate("chewsforyou.json")
+# firebase_app = initialize_app(cred)
+firebase_app = initialize_app()
 db = firestore.client()
 
 
