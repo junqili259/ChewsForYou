@@ -12,24 +12,24 @@ class AddressForm(FlaskForm):
 
 # Form for the user to input register details
 class RegisterForm(FlaskForm):
-    firstName = StringField('First Name',validators=[DataRequired()])
-    lastName = StringField('Last Name',validators=[DataRequired()])
-    email = StringField('Email',validators=[DataRequired(), Email()])
+    firstName = StringField('First Name', validators=[DataRequired()])
+    lastName = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     confirmEmail = StringField('Confirm Email', validators=[DataRequired(), Email(), EqualTo('email')])
-    username = StringField('Username',validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    confirmPassword = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')])
+    confirmPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email',validators=[DataRequired(), Email()])
-    password = PasswordField('Password',validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
 
 class SupportForm(FlaskForm):
-    email = StringField('Email',validators=[DataRequired(), Email()])
-    subject = StringField('Subject',validators=[DataRequired()])
-    issue = TextAreaField('Description of issue',validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    subject = StringField('Subject', validators=[DataRequired()])
+    issue = TextAreaField('Description of issue', validators=[DataRequired()])
     submit = SubmitField('Submit')

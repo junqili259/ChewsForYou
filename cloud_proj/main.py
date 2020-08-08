@@ -24,7 +24,7 @@ db = firestore.client()
 def homepage():
     return render_template('homepage.html')
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     registerForm = RegisterForm()
     if registerForm.validate_on_submit():
@@ -37,7 +37,7 @@ def register():
         password = request.form.get('password')
 
         try:
-            auth.create_user(email=email,password=password)
+            auth.create_user(email=email, password=password)
 
         except Exception as e:
             logger.exception(e)
@@ -46,11 +46,11 @@ def register():
 
         return redirect(url_for('address'))
     
-    return render_template('register.html',form=registerForm)
+    return render_template('register.html', form=registerForm)
     
 
 # Login page for users with a pre-existing account
-@app.route("/login", methods=['GET','POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     # Create and pass login form to login webpage
     loginForm = LoginForm()
@@ -60,7 +60,6 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        
         try:
             web_api_key = os.getenv('web_api_key')
             request_ref = f"https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={web_api_key}"
@@ -79,9 +78,8 @@ def login():
     return render_template('login.html', form=loginForm)
 
 
-
 # Address Form page where user enters address information to obtain a random eatery in response
-@app.route('/address', methods=['GET','POST'])
+@app.route('/address', methods=['GET', 'POST'])
 def address():
     # Create an address form object
     addressForm = AddressForm()
