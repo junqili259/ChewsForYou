@@ -1,44 +1,13 @@
 import os
-import logging
-
 
 from flask import Flask, render_template, url_for, redirect, request, Response, flash
 from forms import AddressForm, RegisterForm, LoginForm, SupportForm
 import requests, random
 from api import business_search
-import sqlalchemy
-
-
-db_user = os.environ.get("CLOUD_SQL_USERNAME")
-db_pass = os.environ.get("CLOUD_SQL_PASSWORD")
-db_name = os.environ.get("CLOUD_SQL_DATABASE_NAME")
-cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
-
 
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
-
-logger = logging.getLogger()
-
-
-db = sqlalchemy.create_engine(
-    # Equivalent URL:
-    # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
-    sqlalchemy.engine.url.URL(
-        drivername="mysql+pymysql",
-        username=db_user,
-        password=db_pass,
-        database=db_name,
-        query={"unix_socket": "/cloudsql/{}".format(cloud_sql_connection_name)},
-    ),
-    pool_size=5,
-    max_overflow=2,
-    pool_timeout=30,
-    pool_recycle=1800,
-)
-
-
 
 
 
@@ -64,6 +33,7 @@ def register():
         password = request.form.get('password')
         
         #   The sql statement for the database
+        """
         stmt = sqlalchemy.text("INSERT INTO Account(fname,lname,email,user,password)" "VALUES(:fname,:lname,:email,:user,:password)")
 
         try:
@@ -71,7 +41,7 @@ def register():
 
                 #   Executing the sql statement
                 conn.execute(stmt,fname=first_name,lname=last_name,email=email,user=username,password=password)
-
+        """
         except Exception as e:
             logger.exception(e)
 
@@ -103,8 +73,9 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
+        #stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
 
+        """
         try:
             #   Execute sql statement
             with db.connect() as conn:
@@ -118,7 +89,7 @@ def login():
                     # flash message if username exist but password doesn't match
                     flash('Invalid Password')
                     return redirect(url_for('login'))
-
+        """
 
         except Exception as e:
             logger.exception(e)
