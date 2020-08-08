@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask, render_template, url_for, redirect, request, Response, flash
 from forms import AddressForm, RegisterForm, LoginForm, SupportForm
 import requests, random
@@ -8,6 +9,8 @@ from firebase_admin import credentials, auth, firestore, initialize_app
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
+
+logger = logging.getLogger()
 
 cred = credentials.Certificate('chewsforyou.json')
 firebase_app = initialize_app(cred)
@@ -21,8 +24,6 @@ def homepage():
     return render_template('homepage.html')
 
 
-# For testing api functions only
-# Will not be in final implementation
 @app.route('/register', methods=['GET','POST'])
 def register():
     registerForm = RegisterForm()
@@ -34,29 +35,15 @@ def register():
         email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
-        
-        #   The sql statement for the database
-        """
-        stmt = sqlalchemy.text("INSERT INTO Account(fname,lname,email,user,password)" "VALUES(:fname,:lname,:email,:user,:password)")
 
         try:
-            with db.connect() as conn:
+            auth.create_user(display_name=username,email=email,password=password)
 
-                #   Executing the sql statement
-                conn.execute(stmt,fname=first_name,lname=last_name,email=email,user=username,password=password)
-        
         except Exception as e:
             logger.exception(e)
-
-            # Username may have been taken already
-            # Email cannot be used again for another registration
-            # Flash the user an error message
             flash('Username already exists')
             return redirect(url_for('register'))
-            #return Response(status=500,response="username already exists")
-        """
 
-        #return Response(status=200,response="Success")
         return redirect(url_for('address'))
     
     return render_template('register.html',form=registerForm)
@@ -69,10 +56,8 @@ def login():
     #Create and pass login form to login webpage
     loginForm = LoginForm()
 
-
     if loginForm.validate_on_submit():
-
-        #   Receive user input from login form
+        # Receive user input from login form
         username = request.form.get('username')
         password = request.form.get('password')
 
