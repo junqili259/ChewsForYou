@@ -43,7 +43,6 @@ The virtual environment has to be running. After it's activated enter the follow
 
 For Mac/Linux/WSL users:
 ```
-$ export FLASK_APP=main.py
 $ flask run
 ```
 
