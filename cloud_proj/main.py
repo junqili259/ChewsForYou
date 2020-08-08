@@ -41,7 +41,7 @@ def register():
 
                 #   Executing the sql statement
                 conn.execute(stmt,fname=first_name,lname=last_name,email=email,user=username,password=password)
-        """
+        
         except Exception as e:
             logger.exception(e)
 
@@ -51,7 +51,7 @@ def register():
             flash('Username already exists')
             return redirect(url_for('register'))
             #return Response(status=500,response="username already exists")
-
+        """
 
         #return Response(status=200,response="Success")
         return redirect(url_for('address'))
