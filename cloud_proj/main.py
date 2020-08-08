@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask, render_template, url_for, redirect, request, Response, flash
 from forms import AddressForm, RegisterForm, LoginForm, SupportForm
 import requests, random
