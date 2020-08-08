@@ -1,8 +1,10 @@
 import os
+import json
+import requests
+import random
 import logging
-from flask import Flask, render_template, url_for, redirect, request, Response, flash
-from forms import AddressForm, RegisterForm, LoginForm, SupportForm
-import requests, random
+from flask import Flask, render_template, url_for, redirect, request, flash
+from forms import AddressForm, RegisterForm, LoginForm
 from api import business_search
 from firebase_admin import credentials, auth, firestore, initialize_app
 
@@ -17,14 +19,12 @@ firebase_app = initialize_app(cred)
 db = firestore.client()
 
 
-#Home page where user can login or create an account
-#def homePage():
+# Home page where user can login or create an account
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('homepage.html')
 
-
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     registerForm = RegisterForm()
     if registerForm.validate_on_submit():
@@ -37,7 +37,7 @@ def register():
         password = request.form.get('password')
 
         try:
-            auth.create_user(display_name=username,email=email,password=password)
+            auth.create_user(email=email, password=password)
 
         except Exception as e:
             logger.exception(e)
@@ -46,54 +46,41 @@ def register():
 
         return redirect(url_for('address'))
     
-    return render_template('register.html',form=registerForm)
+    return render_template('register.html', form=registerForm)
     
 
-
 # Login page for users with a pre-existing account
-@app.route("/login", methods=['GET','POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    #Create and pass login form to login webpage
+    # Create and pass login form to login webpage
     loginForm = LoginForm()
 
     if loginForm.validate_on_submit():
         # Receive user input from login form
-        username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
 
-
-        """
         try:
-            #   Execute sql statement
-            with db.connect() as conn:
-                result = conn.execute(stmt,user=username).fetchone()
-                user_password = result[0]
-
-                # if account exist redirect to address page
-                if user_password == password:
-                    return redirect(url_for('address'))
-                else:
-                    # flash message if username exist but password doesn't match
-                    flash('Invalid Password')
-                    return redirect(url_for('login'))
-        
+            web_api_key = os.getenv('web_api_key')
+            request_ref = f"https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={web_api_key}"
+            headers = {"content-type": "application/json; charset=UTF-8"}
+            data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
+            request_object = requests.post(request_ref, headers=headers, data=data)
+            if request_object.json()['email'] != email:
+                return redirect(url_for('login'))
 
         except Exception as e:
             logger.exception(e)
-
-            # if account doesn't exist flash error message
             flash('Invalid Username and Password')
             return redirect(url_for('login'))
-        """
-
+        
+        return redirect(url_for('address'))
     return render_template('login.html', form=loginForm)
 
 
-
 # Address Form page where user enters address information to obtain a random eatery in response
-@app.route('/address', methods=['GET','POST'])
+@app.route('/address', methods=['GET', 'POST'])
 def address():
-    
     # Create an address form object
     addressForm = AddressForm()
     
