@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextField, SubmitField, PasswordField, TextAreaField
-from wtforms.validators import DataRequired, Length, EqualTo, Email
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField
+from wtforms.validators import DataRequired, EqualTo, Email
 
 #  Form for the user to input address details
 class AddressForm(FlaskForm):

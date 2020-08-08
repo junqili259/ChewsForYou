@@ -19,8 +19,7 @@ firebase_app = initialize_app(cred)
 db = firestore.client()
 
 
-#Home page where user can login or create an account
-#def homePage():
+# Home page where user can login or create an account
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('homepage.html')
