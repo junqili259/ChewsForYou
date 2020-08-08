@@ -1,9 +1,10 @@
 import os
 import json
+import requests
+import random
 import logging
-from flask import Flask, render_template, url_for, redirect, request, Response, flash
-from forms import AddressForm, RegisterForm, LoginForm, SupportForm
-import requests, random
+from flask import Flask, render_template, url_for, redirect, request, flash
+from forms import AddressForm, RegisterForm, LoginForm
 from api import business_search
 from firebase_admin import credentials, auth, firestore, initialize_app
 
@@ -23,7 +24,6 @@ db = firestore.client()
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('homepage.html')
-
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -49,7 +49,6 @@ def register():
     
     return render_template('register.html',form=registerForm)
     
-
 
 # Login page for users with a pre-existing account
 @app.route("/login", methods=['GET','POST'])
