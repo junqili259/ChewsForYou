@@ -138,3 +138,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 cloud_proj/.vscode/launch.json
+cloud_proj/chewsforyou.json
