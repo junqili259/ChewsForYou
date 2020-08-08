@@ -9,11 +9,9 @@ __pycache__/
 # Personal ignores
 cloud_proj/env
 cloud_proj/settings.json
-cloud_proj/api.py
 cloud_proj/.pyc
 cloud_proj/tests
 cloud_proj/app.yaml
-cloud_proj/config.py
 
 # Distribution / packaging
 
@@ -137,3 +135,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+cloud_proj/.vscode/launch.json
+cloud_proj/chewsforyou.json

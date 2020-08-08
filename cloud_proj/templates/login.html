@@ -20,7 +20,7 @@
 		<ul class="list">
 			<li><h1><a href="{{ url_for('homepage')}}" class="chewsforyou">ChewsForYou</a></h1></li>
 			<li><h2>Sign in<h2></li>
-			<li>{{ form.username.label() }} {{ form.username }} <br></li>
+			<li>{{ form.email.label() }} {{ form.email }} <br></li>
 			<li>{{ form.password.label() }} {{ form.password }} <br></li>
 			<li><button class="button">{{ form.submit }}</button></li>
 		</ul>

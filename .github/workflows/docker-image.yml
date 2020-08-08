@@ -20,4 +20,5 @@ jobs:
     - name: Build the Docker image
       run: |
         cd ./cloud_proj
+        docker run --privileged -d docker:dind
         docker build . --file Dockerfile --tag my-image-name:$(date +%s)

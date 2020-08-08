@@ -1,19 +1,12 @@
 import os
+import json
+import requests
+import random
 import logging
-
-
-from flask import Flask, render_template, url_for, redirect, request, Response, flash
-from forms import AddressForm, RegisterForm, LoginForm, SupportForm
-import requests, random
-from api import business_search
-import sqlalchemy
-
-
-db_user = os.environ.get("CLOUD_SQL_USERNAME")
-db_pass = os.environ.get("CLOUD_SQL_PASSWORD")
-db_name = os.environ.get("CLOUD_SQL_DATABASE_NAME")
-cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
-
+from flask import Flask, render_template, url_for, redirect, request, flash
+from forms import AddressForm, RegisterForm, LoginForm
+from api import business_search, sign_in
+from firebase_admin import credentials, auth, firestore, initialize_app
 
 
 app = Flask(__name__)
@@ -21,37 +14,17 @@ app.config.from_object('config.Config')
 
 logger = logging.getLogger()
 
-
-db = sqlalchemy.create_engine(
-    # Equivalent URL:
-    # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
-    sqlalchemy.engine.url.URL(
-        drivername="mysql+pymysql",
-        username=db_user,
-        password=db_pass,
-        database=db_name,
-        query={"unix_socket": "/cloudsql/{}".format(cloud_sql_connection_name)},
-    ),
-    pool_size=5,
-    max_overflow=2,
-    pool_timeout=30,
-    pool_recycle=1800,
-)
+cred = credentials.Certificate('chewsforyou.json')
+firebase_app = initialize_app(cred)
+db = firestore.client()
 
 
-
-
-
-#Home page where user can login or create an account
-#def homePage():
+# Home page where user can login or create an account
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('homepage.html')
 
-
-# For testing api functions only
-# Will not be in final implementation
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     registerForm = RegisterForm()
     if registerForm.validate_on_submit():
@@ -62,79 +35,48 @@ def register():
         email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
-        
-        #   The sql statement for the database
-        stmt = sqlalchemy.text("INSERT INTO Account(fname,lname,email,user,password)" "VALUES(:fname,:lname,:email,:user,:password)")
 
         try:
-            with db.connect() as conn:
-
-                #   Executing the sql statement
-                conn.execute(stmt,fname=first_name,lname=last_name,email=email,user=username,password=password)
+            auth.create_user(email=email, password=password)
 
         except Exception as e:
             logger.exception(e)
-
-            # Username may have been taken already
-            # Email cannot be used again for another registration
-            # Flash the user an error message
             flash('Username already exists')
             return redirect(url_for('register'))
-            #return Response(status=500,response="username already exists")
 
-
-        #return Response(status=200,response="Success")
         return redirect(url_for('address'))
     
-    return render_template('register.html',form=registerForm)
+    return render_template('register.html', form=registerForm)
     
 
-
 # Login page for users with a pre-existing account
-@app.route("/login", methods=['GET','POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    #Create and pass login form to login webpage
+    # Create and pass login form to login webpage
     loginForm = LoginForm()
 
-
     if loginForm.validate_on_submit():
-
-        #   Receive user input from login form
-        username = request.form.get('username')
+        # Receive user input from login form
+        email = request.form.get('email')
         password = request.form.get('password')
-
-        stmt = sqlalchemy.text("SELECT password FROM Account WHERE user=:user")
-
+        
         try:
-            #   Execute sql statement
-            with db.connect() as conn:
-                result = conn.execute(stmt,user=username).fetchone()
-                user_password = result[0]
-
-                # if account exist redirect to address page
-                if user_password == password:
-                    return redirect(url_for('address'))
-                else:
-                    # flash message if username exist but password doesn't match
-                    flash('Invalid Password')
-                    return redirect(url_for('login'))
-
+            status = sign_in(email,password)
+            if status == 200:
+                return redirect(url_for('address'))
 
         except Exception as e:
             logger.exception(e)
-
-            # if account doesn't exist flash error message
             flash('Invalid Username and Password')
             return redirect(url_for('login'))
-
+        
+        #return redirect(url_for('address'))
     return render_template('login.html', form=loginForm)
 
 
-
 # Address Form page where user enters address information to obtain a random eatery in response
-@app.route('/address', methods=['GET','POST'])
+@app.route('/address', methods=['GET', 'POST'])
 def address():
-    
     # Create an address form object
     addressForm = AddressForm()
     

@@ -35,7 +35,6 @@ $ env\Scripts\activate
 
 ```
 $ pip install -r requirements.txt
-
 ```
 
 ## Running the live server on your pc
@@ -44,7 +43,6 @@ The virtual environment has to be running. After it's activated enter the follow
 
 For Mac/Linux/WSL users:
 ```
-$ export FLASK_APP=main.py
 $ flask run
 ```
 
