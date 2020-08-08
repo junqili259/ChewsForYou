@@ -13,6 +13,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "ChewsForYou" 
+          heroku_app_name: "enigmatic-basin-80069" 
           heroku_email: ${{secrets.EMAIL}}
           appdir: "cloud_proj" # <- This will point to the api folder in your project
