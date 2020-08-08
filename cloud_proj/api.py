@@ -7,7 +7,7 @@ def business_search(address):
     api_key = os.getenv('api_key')
     headers = {'Authorization': 'Bearer %s' % api_key}
     url = 'https://api.yelp.com/v3/businesses/search'
-    params = {'term':'restaurants','radius':1609,'location':address}
+    params = {'term': 'restaurants', 'radius': 1609, 'location': address}
     
     req=requests.get(url, params=params, headers=headers)
     

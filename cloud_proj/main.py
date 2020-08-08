@@ -52,7 +52,7 @@ def register():
 # Login page for users with a pre-existing account
 @app.route("/login", methods=['GET','POST'])
 def login():
-    #Create and pass login form to login webpage
+    # Create and pass login form to login webpage
     loginForm = LoginForm()
 
     if loginForm.validate_on_submit():
@@ -83,7 +83,6 @@ def login():
 # Address Form page where user enters address information to obtain a random eatery in response
 @app.route('/address', methods=['GET','POST'])
 def address():
-    
     # Create an address form object
     addressForm = AddressForm()
     
