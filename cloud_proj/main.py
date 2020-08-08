@@ -3,11 +3,15 @@ from flask import Flask, render_template, url_for, redirect, request, Response, 
 from forms import AddressForm, RegisterForm, LoginForm, SupportForm
 import requests, random
 from api import business_search
+from firebase_admin import credentials, auth, firestore, initialize_app
 
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
 
+cred = credentials.Certificate('chewsforyou.json')
+firebase_app = initialize_app(cred)
+db = firestore.client()
 
 
 #Home page where user can login or create an account
