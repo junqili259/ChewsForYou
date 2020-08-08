@@ -1,6 +1,9 @@
 name: Deploy
 
 on:
+  pull_request:
+    branches: 
+      - ChewsForYou_v2
   push:
     branches:
       - ChewsForYou_v2
