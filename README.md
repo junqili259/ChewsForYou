@@ -45,6 +45,10 @@ For Mac/Linux/WSL users:
 ```
 $ flask run
 ```
+**Alternative**
+```
+$ gunicorn main:app
+```
 
 For Windows users:
 ```
