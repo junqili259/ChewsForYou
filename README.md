@@ -1,5 +1,7 @@
 # ChewsForYou
 
+![Heroku Deployment](https://github.com/junqili259/ChewsForYou/workflows/Heroku%20Deploy/badge.svg)
+
 ## Steps for setting up this project
 
 1. Install the latest version of [python 3.0+](https://www.python.org/downloads/)
