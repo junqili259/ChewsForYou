@@ -34,7 +34,7 @@ $ env\Scripts\activate
 4. Now that you created your virtual environment and activated it, we want to install the neccessary packages.
 
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 ## Running the live server on your pc
@@ -44,6 +44,10 @@ The virtual environment has to be running. After it's activated enter the follow
 For Mac/Linux/WSL users:
 ```
 $ flask run
+```
+**Alternative**
+```
+$ gunicorn main:app
 ```
 
 For Windows users:

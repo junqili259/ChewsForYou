@@ -28,8 +28,3 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-class SupportForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    subject = StringField('Subject', validators=[DataRequired()])
-    issue = TextAreaField('Description of issue', validators=[DataRequired()])
-    submit = SubmitField('Submit')

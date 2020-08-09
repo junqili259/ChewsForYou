@@ -24,13 +24,11 @@ def business_search(address):
         restaurant_array.append(restaurant['url'])
     return restaurant_array
 
-
+# Sign into with firebase authetication
 def sign_in(email, password):
     web_api_key = os.environ.get('fb_web_key')
     request_ref = f"https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={web_api_key}"
     headers = {"content-type": "application/json; charset=UTF-8"}
     data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
     request_object = requests.post(request_ref, headers=headers, data=data)
-    print(request_object.status_code)
-    print(request_object.json())
     return request_object.status_code
