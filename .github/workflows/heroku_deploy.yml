@@ -1,4 +1,5 @@
-name: Heroku Deploy
+name: Heroku Deployment
+
 
 on:
   pull_request:
