@@ -1,6 +1,6 @@
 # ChewsForYou
 
-![Heroku Deployment](https://github.com/junqili259/ChewsForYou/workflows/Heroku%20Deploy/badge.svg)
+![Heroku Deployment](https://github.com/junqili259/ChewsForYou/workflows/Heroku%20Deployment/badge.svg)
 
 ## Steps for setting up this project
 
